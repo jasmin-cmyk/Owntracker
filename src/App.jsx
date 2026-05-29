@@ -74,7 +74,7 @@ function TransactionForm({ initial, onSave, onClose }) {
     onSave({ ...form, amount: +form.amount, id: form.id || uid() });
   };
 
-  const cats = form.type === "income" ? ["Salary", "Freelance", "Other"] : form.type === "savings" ? ["Savings"] : CATEGORIES.filter(c => c !== "Savings");
+  const cats = form.type === "income" ? ["Athena", "Andren Homes", "Others"] : form.type === "savings" ? ["Savings"] : CATEGORIES.filter(c => c !== "Savings");
 
   return (
     <div className="flex flex-col gap-3">
@@ -204,12 +204,13 @@ export default function App() {
         </select>
       </div>
 
-      {/* Nav Tabs */}
-      <nav className="px-4 pt-3 flex gap-1 overflow-x-auto pb-1">
-        {[["dashboard","📊 Dashboard"],["transactions","💳 Transactions"],["analytics","📈 Analytics"]].map(([id, label]) => (
+      {/* Nav Tabs — fixed width, no scroll, icon + short label */}
+      <nav className="px-4 pt-3 flex gap-1">
+        {[["dashboard","📊","Dashboard"],["transactions","💳","Transactions"],["analytics","📈","Analytics"]].map(([id, icon, label]) => (
           <button key={id} onClick={() => setTab(id)}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${tab === id ? "bg-gradient-to-r from-pink-400 to-rose-400 text-white shadow-md" : "bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 border border-pink-100 dark:border-zinc-800"}`}>
-            {label}
+            className={`flex-1 flex flex-col items-center gap-0.5 py-2 rounded-xl text-xs font-semibold transition-all ${tab === id ? "bg-gradient-to-r from-pink-400 to-rose-400 text-white shadow-md" : "bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 border border-pink-100 dark:border-zinc-800"}`}>
+            <span className="text-base leading-none">{icon}</span>
+            <span>{label}</span>
           </button>
         ))}
       </nav>
